@@ -76,10 +76,11 @@ Shader "Hidden/Circles"
 
                float3 finalColor = float3(0,0,0);
 
-               finalColor += circles(lerp(col, col3, sin(6.2831853*length(uv0))), uv, 3, -0.45, 4);
-               finalColor += circles(lerp(col2, col4, sin(6.2831853*length(uv0))), frac(2.5*uv)-0.5, 4, -0.45,3);
-               finalColor += circles(lerp(col3, col, sin(6.2831853*length(uv0))), frac(5*uv)-0.5, 3, 0.45, 2);
-               finalColor += circles(lerp(col4, col2, sin(6.2831853*length(uv0))), frac(5*uv)-0.5, 2, -0.45, 0.5);
+               finalColor += circles(lerp(col, col2, sin(6.2831853*length(uv0))), uv, 3, -0.45, 4);
+               finalColor *= circles(lerp(col2, col3, sin(6.2831853*length(uv0))), frac(2.5*uv)-0.5, 4, -0.45,35);
+               finalColor *= circles(lerp(col3, col4, sin(6.2831853*length(uv0))), frac(5*uv)-0.5, 3, -0.45, 20);
+
+               finalColor += circles(lerp(col4, col, sin(6.2831853*length(uv0))), frac(5*uv)-0.5, 2, 0.45, 1);
 
 
                finalColor = pow(finalColor, 1.2);
