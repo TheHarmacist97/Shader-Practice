@@ -1,4 +1,4 @@
-Shader "Unlit/UV Vis"
+Shader "Custom/UV Vis"
 {
     Properties
     {
