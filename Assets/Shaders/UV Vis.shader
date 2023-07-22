@@ -25,7 +25,6 @@ Shader "Unlit/UV Vis"
             struct v2f
             {
                 float4 col : COLOR;
-                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
             };
 
@@ -36,7 +35,7 @@ Shader "Unlit/UV Vis"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.col = float4(v.uv.xy, 0, 0);
+                o.col = float4(v.uv.xy, 0.5, 0);
                 return o;
             }
 
