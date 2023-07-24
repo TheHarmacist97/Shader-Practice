@@ -29,9 +29,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Frequency: 68.66
     - _Gloss: 1
-    - _Scale: 2
-    - _Speed: 1
+    - _Scale: 0.04
+    - _Speed: 7.64
+    - _VertexCount: 10240
     m_Colors:
     - _AmbientLight: {r: 0.14328942, g: 0.22750464, b: 0.26415092, a: 0}
     - _Color: {r: 0.745283, g: 0.28475437, b: 0.69638133, a: 1}

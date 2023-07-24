@@ -7,6 +7,7 @@ Shader "Custom/SkewUnlit"
         [Range(0, 10)]_Gloss("Glossiness", float) = 1
         _Color("Albedo", Color) = (1,1,1,1)
         _Speed("Animation Speed", float) = 1.0
+        _Frequency("Skew Frequency", float) = 1.0
         _Scale("Skew Scale", float) = 1.0
     }
 
@@ -40,7 +41,7 @@ Shader "Custom/SkewUnlit"
                 float3 worldPos : TEXCOORD1;
             };
 
-             float _Speed, _Scale;
+            float _Speed, _Frequency, _Scale;
 
             v2f vert (appdata v)
             {
@@ -48,7 +49,7 @@ Shader "Custom/SkewUnlit"
                 o.uv = v.uv;
                 float4 inVert = 0;
                 inVert = UnityObjectToClipPos(v.vertex);
-                inVert.x += sin(_Time.y * _Speed + inVert.y * _Scale);
+                inVert.x += sin(_Time.y * _Speed + (v.vertex.y*_Frequency))*_Scale;
                 o.vertex = inVert;
                 o.normal = v.normal;
                 o.worldPos = mul( unity_ObjectToWorld, v.vertex);

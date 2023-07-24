@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: VertexSkew
-  m_Shader: {fileID: 4800000, guid: 27f3cd5f4b6b6b747ab14c47a79aacf3, type: 3}
+  m_Name: ID Vis
+  m_Shader: {fileID: 4800000, guid: d745ea9aa86edb34186eca8117776744, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,13 +24,10 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4499836ec803a0443834895abc208fba, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats:
-    - _Frequency: 5
-    - _Scale: 0.2
-    - _Speed: 1.5
+    m_Floats: []
     m_Colors: []
   m_BuildTextureStacks: []

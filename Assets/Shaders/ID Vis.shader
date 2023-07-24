@@ -1,11 +1,9 @@
-Shader "Unlit/VertexSkew"
+Shader "Unlit/ID Vis"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Speed("Animation Speed", float) = 1.0
-        _Frequency("Skew Frequency", float) = 1.0
-        _Scale("Skew Scale", float) = 1.0
+        _VertexCount("Vertices", float) = 1.0
     }
     SubShader
     {
@@ -22,7 +20,8 @@ Shader "Unlit/VertexSkew"
             struct appdata
             {
                 float4 vertex : POSITION;
-                float3 normal : NORMAL;
+                float2 uv : TEXCOORD0;
+                uint id : SV_VERTEXID;
             };
 
             struct v2f
@@ -33,16 +32,13 @@ Shader "Unlit/VertexSkew"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-           float _Speed, _Frequency, _Scale;
+            float _VertexCount;
 
             v2f vert (appdata v)
             {
                 v2f o;
-                float4 inVert = 0;
-                inVert = UnityObjectToClipPos(v.vertex);
-                inVert.x += sin(_Time.y * _Speed + inVert.y * _Frequency)*_Scale;
-                o.vertex = inVert;
-                o.col = float4(v.normal, 0.0)*0.5+0.5;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.col = v.id/_VertexCount;
                 return o;
             }
 
