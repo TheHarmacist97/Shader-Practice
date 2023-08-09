@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UnlitPractice 1
-  m_Shader: {fileID: 4800000, guid: e13ece1239ba66d44be346d37aff1c3d, type: 3}
+  m_Name: Cel
+  m_Shader: {fileID: 4800000, guid: bd5e5b9c866d02f4da4414686dc9c71e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -29,19 +29,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ColorMask: 15
-    - _DiffSteps: 8
-    - _Gloss: 3.8
-    - _SpecSteps: 3
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
+    - _Gloss: 1
     m_Colors:
-    - _AmbientLight: {r: 0.04832025, g: 0, b: 0.6603774, a: 0}
-    - _Color: {r: 1, g: 0.74908996, b: 0.4078431, a: 1}
-    - _LightColor: {r: 0.6792453, g: 0.31333104, b: 0.253115, a: 0}
-    - _LightDir: {r: -0.95, g: -3.3, b: -3, a: 0}
+    - _AmbientLight: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

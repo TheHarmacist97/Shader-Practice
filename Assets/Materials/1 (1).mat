@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UnlitPractice 1
-  m_Shader: {fileID: 4800000, guid: e13ece1239ba66d44be346d37aff1c3d, type: 3}
+  m_Name: 1 (1)
+  m_Shader: {fileID: 4800000, guid: 990a0ac94d540fd429e0aad0fd6757aa, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,24 +24,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 3f1cc6295b4ed1a41a663f4e524afad0, type: 3}
+        m_Scale: {x: 105.2, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ColorMask: 15
-    - _DiffSteps: 8
-    - _Gloss: 3.8
-    - _SpecSteps: 3
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
+    - _Area: 0.559
+    - _Dampener: 6.07
+    - _Div: 5
+    - _Power: -4
+    - _Startup: 1
+    - _Width: 0.1
     m_Colors:
-    - _AmbientLight: {r: 0.04832025, g: 0, b: 0.6603774, a: 0}
-    - _Color: {r: 1, g: 0.74908996, b: 0.4078431, a: 1}
-    - _LightColor: {r: 0.6792453, g: 0.31333104, b: 0.253115, a: 0}
-    - _LightDir: {r: -0.95, g: -3.3, b: -3, a: 0}
+    - _Color: {r: 1.6055586, g: 0.58822423, b: 0.2101517, a: 1}
+    - _Color2: {r: 3.3254902, g: 0.031262733, b: 0, a: 0}
+    - _Pos: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

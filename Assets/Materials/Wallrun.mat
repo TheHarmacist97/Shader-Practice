@@ -29,13 +29,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Area: 2.45
-    - _Dampener: 3.65
+    - _Area: 0.354
+    - _Dampener: 27.5
     - _Div: 3
-    - _Power: -1.5
-    - _Width: 0.05
+    - _Power: -1.45
+    - _Startup: 1
+    - _Width: 0.09
     m_Colors:
-    - _Color: {r: 0.83137256, g: 0.58804715, b: 0.42745098, a: 0}
-    - _Color2: {r: 5.3403134, g: 0, b: 0, a: 0}
+    - _Color: {r: 2.9960783, g: 1.9731092, b: 0, a: 0}
+    - _Color2: {r: 4, g: 0.0000008106232, b: 0, a: 0}
     - _Pos: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

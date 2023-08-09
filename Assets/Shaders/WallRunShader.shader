@@ -9,8 +9,9 @@ Shader "Unlit/WallRunShader"
         _Pos("Point Position", vector) = (0,0,0)
         _Div("Line Divisions", float) = 5.0
         _Dampener("Dampener", float) = 5.0
-        _Power("Power", Range(-100, 0)) = 5.0
-
+        _Power("Power", Range(-10, 0)) = 5.0
+        _Area("Area Of Effect", Range(0, 1)) = 5.0
+        _Startup("Startup Multiplier", Range(0,1)) = 0
        
     }
     SubShader
@@ -49,7 +50,7 @@ Shader "Unlit/WallRunShader"
                 return o;
             }
             float4 _Color, _Color2;
-            float _Width, _Div, _Area, _Dampener, _Power;
+            float _Width, _Div, _Area, _Dampener, _Power, _Startup;
             float3 _Pos;
             fixed4 frag (v2f i) : SV_Target
             {
@@ -57,10 +58,13 @@ Shader "Unlit/WallRunShader"
                 float2 uv = (i.uv-0.5)*2;
                 uv = frac(uv*_Div);
                 float d = uv.y;
-                d = smoothstep(0.5+_Width,0.5,d) - smoothstep(0.5,0.5-_Width,d);
-                float l = length(i.worldPos - pos);
+                d = smoothstep(0.5+_Width,0.5,uv.y) - smoothstep(0.5,0.5-_Width,uv.y);
+                float l = length(i.worldPos - pos)*_Area;
                 float falloff = saturate(pow(l, _Power)/_Dampener);
                 float4 finalCol = lerp(_Color2, _Color, falloff) * d * falloff;
+                finalCol = saturate(finalCol) + (0.1*_Color*falloff);
+                finalCol *= _Startup;
+                finalCol += tex2D(_MainTex, i.uv);
                 return finalCol;
             }
             ENDCG
