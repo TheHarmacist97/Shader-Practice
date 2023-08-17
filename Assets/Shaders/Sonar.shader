@@ -8,6 +8,8 @@ Shader "Custom/Sonar"
         _Metallic ("Metallic", Range(0,1)) = 0.0
         _Frequency("Frequency", Float) =1.
         _Origin("Orgin", Vector) = (0,0,0,0)
+        [HDR]_WaveColor("WColor", Color) = (0,0,0,0)
+
     }
     SubShader
     {
@@ -34,7 +36,7 @@ Shader "Custom/Sonar"
         fixed4 _Color;
         float3 _Origin;
         float _Frequency;
-
+        float3 _WaveColor;
 
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
         // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -52,12 +54,12 @@ Shader "Custom/Sonar"
         {
             float3 pos = IN.worldPos;
             float sinValue = sin(length(_Origin-IN.worldPos)*_Frequency - _Time.z);
-            float wave = step(0.998, sinValue);
-            float smoothWave = smoothstep(0,1,invLerp(0.998, 1.0, sinValue));
+            float smoothWave = smoothstep(0,1,invLerp(0.9, 1.0, sinValue));
 
             // Albedo comes from a texture tinted by color
-            float3 col = smoothWave*float3(0,0.4,1.0);
+            float3 col = smoothWave*_WaveColor;
             fixed4 c = float4(col,1);
+            o.Emission = smoothWave*_WaveColor;
             o.Albedo = c.rgb;
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
