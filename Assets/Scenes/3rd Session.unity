@@ -1144,6 +1144,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: vARUN_MODEL
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: baa42abb82e79b3418cde0a67fea80e0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2239,7 +2243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &831072670
 Transform:
   m_ObjectHideFlags: 0
@@ -10661,7 +10665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.1
-  target: {fileID: 614383829}
+  target: {fileID: 420528341}
 --- !u!114 &2086653592
 MonoBehaviour:
   m_ObjectHideFlags: 0

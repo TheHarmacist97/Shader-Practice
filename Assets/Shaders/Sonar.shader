@@ -6,10 +6,11 @@ Shader "Custom/Sonar"
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
-        _Frequency("Frequency", Float) =1.
         _Origin("Orgin", Vector) = (0,0,0,0)
+        _Frequency("Frequency", Float) = 1.
         [HDR]_WaveColor("WColor", Color) = (0,0,0,0)
-
+        _Width("Thickness", Float) = 0.2
+        _Speed("Speed", Float) = 1.
     }
     SubShader
     {
@@ -34,8 +35,11 @@ Shader "Custom/Sonar"
         half _Glossiness;
         half _Metallic;
         fixed4 _Color;
+
         float3 _Origin;
         float _Frequency;
+        float _Speed;
+        float _Width;
         float3 _WaveColor;
 
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
@@ -53,8 +57,8 @@ Shader "Custom/Sonar"
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             float3 pos = IN.worldPos;
-            float sinValue = sin(length(_Origin-IN.worldPos)*_Frequency - _Time.z);
-            float smoothWave = smoothstep(0,1,invLerp(0.9, 1.0, sinValue));
+            float sinValue = sin(dot(_Origin , IN.worldPos) * _Frequency - _Time.z * _Speed);
+            float smoothWave = lerp(0,1,invLerp(1-(_Width*_Frequency), 1.0, sinValue));
 
             // Albedo comes from a texture tinted by color
             float3 col = smoothWave*_WaveColor;
