@@ -30,6 +30,7 @@ Shader "Custom/Sonar"
         {
             float2 uv_MainTex;
             float3 worldPos;
+            float4 screenPos;
         };
 
         half _Glossiness;
@@ -57,14 +58,19 @@ Shader "Custom/Sonar"
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             float3 pos = IN.worldPos;
-            float sinValue = sin(dot(_Origin , IN.worldPos) * _Frequency - _Time.z * _Speed);
+            float sinValue = sin(length(_Origin - IN.worldPos) * _Frequency - _Time.z * _Speed);
             float smoothWave = lerp(0,1,invLerp(1-(_Width*_Frequency), 1.0, sinValue));
 
             // Albedo comes from a texture tinted by color
-            float3 col = smoothWave*_WaveColor;
-            fixed4 c = float4(col,1);
-            o.Emission = smoothWave*_WaveColor;
-            o.Albedo = c.rgb;
+
+            float2 textureCoordinate = IN.screenPos.xy / IN.screenPos.w;
+            float aspect = _ScreenParams.x / _ScreenParams.y;
+            textureCoordinate.x = textureCoordinate.x * aspect;
+
+            float4 col = smoothWave*textureCoordinate.xyyy;
+            //fixed4 c = float4(col,1);
+            o.Emission = col.rgb;
+            o.Albedo = col.rgb;
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
