@@ -44,10 +44,11 @@ Shader "Custom/ScreenPos"
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
-                float2 textureCoordinate = i.screenPosition.xy/i.screenPosition.w *0.5;
+                float2 screenUV = i.screenPosition.xy/i.screenPosition.w;
                 float aspect = _ScreenParams.x / _ScreenParams.y;
-                textureCoordinate.x*=aspect;
-                textureCoordinate = TRANSFORM_TEX(textureCoordinate, _MainTex);
+                screenUV.x*=aspect;
+
+                float2 textureCoordinate = TRANSFORM_TEX(screenUV, _MainTex);
                 textureCoordinate.x+=_Time.x;
                 fixed4 col = tex2D(_MainTex, textureCoordinate);
                 return col;
