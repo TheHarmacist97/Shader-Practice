@@ -118,7 +118,7 @@ Shader "Hidden/ReNodes"
             {
                 float2 pa = p-a; //direction to point from point A
                 float2 ba = b-a; //direction defining line
-                float t = saturate(dot(pa,ba)/dot(ba,ba))*1;
+                float t = saturate(dot(pa,ba)/dot(ba,ba));
                 return length(pa -ba*t);
             }
 
