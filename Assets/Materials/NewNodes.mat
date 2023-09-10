@@ -31,22 +31,26 @@ Material:
     m_Floats:
     - _LineBrightness: 0.1
     - _StarSize: 5
-    - _aspect: 5.44
-    - _dotSpeed: 0.5
-    - _fillMultiplier: 0.189
-    - _maxThreshold: 1.1
-    - _minThreshold: 0.62
+    - _aspect: 6
+    - _dotSpeed: 0.4
+    - _fillMultiplier: 0.067
+    - _maxIter: 2
+    - _maxThreshold: 1.11
+    - _minThreshold: 0.35
     - _randomFactor: 2.01
-    - _secondaryUVBrightness: 0.272
-    - _secondaryUVSize: 2
+    - _scrollSpeed: 0.1
+    - _secondaryUVBrightness: 0.458
+    - _secondaryUVSize: 1.75
     - _sparkleStrength: 125
-    - _starBrightness: 0.105
-    - _starSharpness: 7.65
-    - _starSize: 0.101
+    - _starBrightness: 0.08
+    - _starSharpness: 3.12
+    - _starSize: 0.172
+    - _tertiaryUVBrightness: 0.216
+    - _tertiaryUVSize: 2.75
     - _threshold: 1.43
-    - _uvSize: 6.66
-    - _yCutoff: 0.45
+    - _uvSize: 10.27
+    - _yCutoff: -1.5
     m_Colors:
-    - _backFill: {r: 0.7885766, g: 0, b: 1.4980394, a: 1}
-    - _baseColor: {r: 6.4335065, g: 8.179103, b: 25.6, a: 1}
+    - _backFill: {r: 0, g: 1.4980394, b: 1.3181691, a: 1}
+    - _baseColor: {r: 13.76636, g: 4.110461, b: 3.4596083, a: 1}
   m_BuildTextureStacks: []

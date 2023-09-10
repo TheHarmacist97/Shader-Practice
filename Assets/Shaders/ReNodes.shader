@@ -2,12 +2,14 @@ Shader "Hidden/ReNodes"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
         _uvSize("Size", float) = 5.0
         _dotSpeed("Star movement speed", float) = 1.
 
-        _secondaryUVSize("Back layer UV size", float) = 2.0
-        _secondaryUVBrightness("Back layer brightness", Range(0.1, 1.0)) = 1.
+        _secondaryUVSize("Second layer UV size", float) = 2.0
+        _secondaryUVBrightness("Second layer brightness", Range(0.1, 1.0)) = 1.
+
+        _tertiaryUVSize("Third layer UV size", float) = 2.0
+        _tertiaryUVBrightness("Third layer brightness", Range(0.1, 1.0)) = 1.
 
         _LineBrightness("Line Brightness", Range(0.1, 3.0)) = 1.
         _maxThreshold("Max line connection threshold", float) = 0.
@@ -24,6 +26,7 @@ Shader "Hidden/ReNodes"
 
         [HDR]_backFill("backFill color", Color) = (0.2,0.3,0.8)
         _fillMultiplier("fill value", Range(0,1)) = 0.
+        _scrollSpeed("Scroll speed", float) = 1.
 
     }
     SubShader
@@ -63,13 +66,15 @@ Shader "Hidden/ReNodes"
             }
 
                         
-            sampler2D _MainTex;
             float3 _baseColor;
             float _uvSize;
             float _aspect;
             
             float _secondaryUVSize;
             float _secondaryUVBrightness;
+
+            float _tertiaryUVSize;
+            float _tertiaryUVBrightness;
             
             float _LineBrightness;
             float _maxThreshold;
@@ -84,6 +89,8 @@ Shader "Hidden/ReNodes"
             float _yCutoff;
             float3 _backFill;
             float _fillMultiplier;
+
+            float _scrollSpeed;
 
 
             //distance to a line defined by point a and b
@@ -207,15 +214,21 @@ Shader "Hidden/ReNodes"
                 float2 boxUV = GetCorrectedUV(i.worldPos);
                 boxUV.x*=_aspect;
                 boxUV*=_uvSize;
-                boxUV.x+=_Time.x*5.;
-               
-                float lineVal = Layer(boxUV);
-                lineVal+= Layer(boxUV*_secondaryUVSize)*_secondaryUVBrightness;
+                float lineVal=0;
+
+                boxUV.x +=_Time.y*_scrollSpeed*0.55;
+                lineVal += Layer(boxUV*_tertiaryUVSize)*_tertiaryUVBrightness;
+
+                boxUV.x +=_Time.y*_scrollSpeed*0.8;
+                lineVal += Layer(boxUV*_secondaryUVSize)*_secondaryUVBrightness;
+
+                boxUV.x +=_Time.y*_scrollSpeed;
+                lineVal+= Layer(boxUV);
 
                 //float grid = step(0.48, gridUV.x) + step(0.48,gridUV.y);
                 float4 col = lineVal*float4(_baseColor, 0);
                 col+= float4(_backFill, 0)*_fillMultiplier;
-                col*= smoothstep(_yCutoff*_uvSize, _uvSize,boxUV.y)-smoothstep(0, _uvSize*0.85, uv.y);
+                col*= smoothstep(_yCutoff*_uvSize, _uvSize,boxUV.y)-smoothstep(0, _uvSize*0.93, uv.y);
                 return col;
 
             }
