@@ -8,15 +8,24 @@ Shader "Custom/Sonar"
         _Metallic ("Metallic", Range(0,1)) = 0.0
         _Origin("Orgin", Vector) = (0,0,0,0)
         _Frequency("Frequency", Float) = 1.
-        [HDR]_WaveColor("WColor", Color) = (0,0,0,0)
+        [HDR]_WaveColor("Wave Color", Color) = (0,0,0,0)
         _Width("Thickness", Float) = 0.2
         _Speed("Speed", Float) = 1.
+
+        [Space]
+        [Space]
+
+        _FresnelPower("Fresnel Power", Float) = 1
+        [HDR]_FresnelColor("Fresnel Color", Color) = (1,1,1,1)
+        [Toggle(ENABLE_FRESNEL)] _Enable_Fresnel ("Enable Fresnel", Float) = 0
+        [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("Source Blend", Float) = 0
+        [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("Destination Blend", Float) = 0
+
     }
     SubShader
     {
-        Tags { "RenderType"="Cutout" }
+        Tags { "RenderType"="Opaque" }
         LOD 200
-
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
         #pragma surface surf Standard fullforwardshadows
@@ -30,7 +39,6 @@ Shader "Custom/Sonar"
         {
             float2 uv_MainTex;
             float3 worldPos;
-            float4 screenPos;
         };
 
         half _Glossiness;
@@ -59,15 +67,10 @@ Shader "Custom/Sonar"
         {
             float3 pos = IN.worldPos;
             float sinValue = sin(length(_Origin - IN.worldPos) * _Frequency - _Time.z * _Speed);
-            float smoothWave = lerp(0,1,invLerp(1-(_Width*_Frequency), 1.0, sinValue));
+            float smoothWave = lerp(0,1,smoothstep(1-(_Width*_Frequency), 1.0, sinValue));
+            //Add noise to smoothWave value here
 
-            // Albedo comes from a texture tinted by color
-
-            float2 textureCoordinate = IN.screenPos.xy / IN.screenPos.w;
-            float aspect = _ScreenParams.x / _ScreenParams.y;
-            textureCoordinate.x = textureCoordinate.x * aspect;
-
-            float4 col = smoothWave*textureCoordinate.xyyy;
+            float4 col = float4(smoothWave*_WaveColor, 1)+_Color;
             //fixed4 c = float4(col,1);
             o.Emission = col.rgb;
             o.Albedo = col.rgb;
@@ -77,6 +80,71 @@ Shader "Custom/Sonar"
             o.Alpha = 1.0;
         }
         ENDCG
+        Pass
+        {
+            Blend [_SrcBlend] [_DstBlend]
+            ZTest Greater
+            CGPROGRAM
+            #pragma multi_compile __ ENABLE_FRESNEL
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "UnityCG.cginc"
+
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
+                float3 normal : NORMAL;
+            };
+
+            struct fragmentInput
+            {
+                float2 uv : TEXCOORD0;
+                float4 vertex : SV_POSITION;
+                float3 worldPos : TEXCOORD1;
+                float3 viewDir : TEXCOORD2;
+                float3 normal : TEXCOORD3;
+            };
+
+            float _FresnelPower;
+            float4 _FresnelColor;
+
+            float3 _Origin;
+            float _Frequency;
+            float _Speed;
+            float _Width;
+            
+            fragmentInput vert(appdata data)
+            {
+                fragmentInput fragIn;
+                fragIn.vertex = UnityObjectToClipPos(data.vertex);
+            #ifdef ENABLE_FRESNEL
+                fragIn.uv =  data.uv;
+                fragIn.worldPos = mul(unity_ObjectToWorld, data.vertex);
+                fragIn.viewDir = normalize(UnityWorldSpaceViewDir(fragIn.worldPos));
+                fragIn.normal = UnityObjectToWorldNormal(data.normal);
+                return fragIn;
+            #else
+                return fragIn;
+            #endif
+            }
+
+            fixed4 frag (fragmentInput i) : SV_TARGET
+            {
+            #ifdef ENABLE_FRESNEL
+                float3 pos = i.worldPos;
+                float sinValue = sin(length(_Origin - i.worldPos) * _Frequency - _Time.z * _Speed);
+                float smoothWave = lerp(0,1,smoothstep(1-(_Width*_Frequency), 1.0, sinValue));
+                float fresnelVal = pow(1 - saturate(dot(i.normal, i.viewDir)), _FresnelPower);
+                float4 col = fresnelVal*_FresnelColor*smoothWave;
+                return col;
+            #else
+                return 1;
+            #endif
+            }
+
+            ENDCG
+        }
     }
     FallBack "Diffuse"
 }
