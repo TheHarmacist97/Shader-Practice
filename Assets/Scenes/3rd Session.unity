@@ -3210,6 +3210,7 @@ GameObject:
   - component: {fileID: 1079627925}
   - component: {fileID: 1079627924}
   - component: {fileID: 1079627923}
+  - component: {fileID: 1079627927}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -3288,7 +3289,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079627922}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1079627926
 Transform:
   m_ObjectHideFlags: 0
@@ -3298,12 +3299,26 @@ Transform:
   m_GameObject: {fileID: 1079627922}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 11, y: 11, z: 11}
+  m_LocalScale: {x: 12.999999, y: 12.999999, z: 12.999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1079627927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079627922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2139182aedd29064597f400e3685eb6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 10, z: 0}
+  rate: 0.5
 --- !u!1 &1136131545
 GameObject:
   m_ObjectHideFlags: 0

@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotScale: 0.1
-  smoothingRotationDelta: 0.3
+  smoothingRotationDelta: 0.03
 --- !u!1 &260492399
 GameObject:
   m_ObjectHideFlags: 0

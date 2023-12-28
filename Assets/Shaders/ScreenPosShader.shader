@@ -66,6 +66,7 @@ Shader "Custom/ScreenPos"
                 textureCoordinate += _UVOffset;
                 fixed4 col = tex2D(_MainTex, textureCoordinate);
                 float fresnelVal = pow(1 - saturate(dot(i.normal, i.viewDir)), _FresnelPower);
+                fresnelVal*= 1 + sin(_Time.y)*0.5;
                 col += fresnelVal*_FresnelColor;
                 return col;
             }
