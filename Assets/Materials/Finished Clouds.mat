@@ -29,10 +29,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CloudScale: 0.94
-    - _TRate: 0.01
+    - _CloudScale: 0.51
+    - _TRate: 0.03
     - _TScrub: 1
     m_Colors:
-    - skycolour1: {r: 0.35563534, g: 0.55128694, b: 0.7509433, a: 1}
-    - skycolour2: {r: 1, g: 0.6846629, b: 0.39999998, a: 1}
+    - skycolour1: {r: 0.20088999, g: 0.3611556, b: 0.6226415, a: 1}
+    - skycolour2: {r: 0.8415094, g: 0.60320544, b: 0.2651548, a: 1}
   m_BuildTextureStacks: []
