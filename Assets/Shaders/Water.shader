@@ -3,7 +3,6 @@ Shader "Unlit/Water"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _MaxIter("Fractal level",Range(1,10)) = 2.0
         _BaseWaterColor("Color of the water", color) = (1,1,1)
     }
     SubShader
@@ -36,18 +35,36 @@ Shader "Unlit/Water"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-            float _MaxIter;
             float3 _BaseWaterColor;
+
+            struct waveData
+            {
+                float wLength;
+                float amplitude;
+                float phi;
+                float2 direction;
+            };
+            uniform StructuredBuffer<waveData> _Waves;
+            int _NumberOfWaves;
+
+            float GetHeight(waveData wave, float2 xz)
+            {
+                float height = wave.amplitude * sin(dot(wave.direction,xz)*wave.wLength + _Time.y+wave.phi);
+                return height;
+            }
+
 
             v2f vert (appdata v)
             {
                 v2f o;
                 float3 worldPos = mul( unity_ObjectToWorld,v.vertex);
-                float yx = sin(worldPos.x*0.72 + _Time.y);
-                float yz = sin(worldPos.z*0.85 - _Time.y*2.0);
+                float finalHeight = 0;
+                for(int iter = 0; iter<_NumberOfWaves; iter++)
+                {
+                    finalHeight += GetHeight(_Waves[iter], worldPos.xz);
+                }
+                v.vertex.y += finalHeight;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.vertex.y += (yx+yz)*5.;
-
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
