@@ -9,6 +9,7 @@ Shader "Unlit/Water"
     {
         Tags { "RenderType"="Opaque" }
         LOD 100
+        Cull Off
 
         Pass
         {
