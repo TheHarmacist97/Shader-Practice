@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8991351672775575019}
   - component: {fileID: 6707091728896195404}
   - component: {fileID: 667160540144483943}
+  - component: {fileID: 6338039452832612775}
   m_Layer: 0
   m_Name: 66K
   m_TagString: Untagged
@@ -26,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2406840071976550618}
   serializedVersion: 2
-  m_LocalRotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 200, y: 0, z: 0}
-  m_LocalScale: {x: 50, y: 1, z: 50}
+  m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!33 &6707091728896195404
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c09ae44bd56f44d4fab980b7d565af5d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,3 +84,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6338039452832612775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2406840071976550618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd977cd2ba9b1d459a5646efcad0fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - waveLength: 0.05
+    amplitude: 1.2
+    speed: 1.5
+    direction: {x: 1, y: 0}
+  - waveLength: 1.06
+    amplitude: 0.5
+    speed: 0.5
+    direction: {x: 0, y: -1}
+  - waveLength: 1.7
+    amplitude: 0.93
+    speed: 2.5
+    direction: {x: -0.707, y: 0.707}
+  mat: {fileID: 2100000, guid: c09ae44bd56f44d4fab980b7d565af5d, type: 2}

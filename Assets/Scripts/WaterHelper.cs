@@ -6,15 +6,14 @@ using UnityEngine;
 
 public class WaterHelper : MonoBehaviour
 {
-    [SerializeField] private Waves[] waves;
+    public Waves[] waves;
     [SerializeField] private Material mat;
     [SerializeField] private ComputeBuffer buffer;
 
     private int stride;
     void Start()
     {
-        stride = System.Runtime.InteropServices.Marshal.SizeOf(typeof(Waves));
-        print(stride);
+        stride = Marshal.SizeOf(typeof(Waves));
         buffer = new ComputeBuffer(waves.Length, stride, ComputeBufferType.Default);
         buffer.SetData(waves);
         mat.SetInt("_NumberOfWaves", waves.Length);
@@ -28,19 +27,23 @@ public class WaterHelper : MonoBehaviour
     [ContextMenu("Send Values To Material")]
     private void SendValues()
     {
-        stride = System.Runtime.InteropServices.Marshal.SizeOf(typeof(Waves));
+        //if(buffer!=null) 
+        //{
+        //    buffer.Release();
+        //}
+        stride = Marshal.SizeOf(typeof(Waves));
         buffer = new ComputeBuffer(waves.Length, stride, ComputeBufferType.Default);  
-        //buffer.Release();
         mat.SetInt("_NumberOfWaves", waves.Length);
         mat.SetBuffer("_Waves", buffer);
     }
 
-    [Serializable]
-    struct Waves
-    {
-        [SerializeField, Range(0.01f, 2f)]public float waveLength;
-        public float amplitude;
-        public float speed;
-        public Vector2 direction;
-    }
+}
+[Serializable]
+public struct Waves
+{ 
+    [SerializeField, Range(0.01f, 2f)]public float waveLength;
+    public float amplitude;
+    public float speed;
+    //public float sharpness;
+    public Vector2 direction;
 }

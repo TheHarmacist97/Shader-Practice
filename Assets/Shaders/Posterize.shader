@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
 Shader "Custom/Posterize"
 {
     Properties
@@ -45,7 +47,7 @@ Shader "Custom/Posterize"
                 v2f o;
                 o.uv = v.uv;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.normal = v.normal;
+                o.normal = mul((float3x3)unity_ObjectToWorld, SCALED_NORMAL);;
                 o.worldPos = mul( unity_ObjectToWorld, v.vertex);
                 return o;
             }

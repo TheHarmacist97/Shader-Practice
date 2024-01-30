@@ -30,8 +30,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
-    - _DiffSteps: 8
-    - _Gloss: 3.8
+    - _DiffSteps: 18.41
+    - _Gloss: 3.3
     - _SpecSteps: 3
     - _Stencil: 0
     - _StencilComp: 8
