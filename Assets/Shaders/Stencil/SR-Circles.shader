@@ -73,7 +73,7 @@ Shader "Unlit/SR-Circles"
                 d = sin(d*n + (t*speed))/width;
                 d = abs(d);
                 d = 0.02/d;
-                return col*d;
+                return saturate(col*d);
             }
 
             fixed4 frag (v2f i) : SV_Target
