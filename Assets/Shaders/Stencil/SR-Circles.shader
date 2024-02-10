@@ -61,36 +61,56 @@ Shader "Unlit/SR-Circles"
                 return o;
             }
 
+            float3 aces_tonemap(float3 color)
+            {	
+	            float3x3 m1 = float3x3(
+                    0.59719, 0.07600, 0.02840,
+                    0.35458, 0.90834, 0.13383,
+                    0.04823, 0.01566, 0.83777
+	            );
+	            float3x3 m2 = float3x3(
+                    1.60475, -0.10208, -0.00327,
+                    -0.53108,  1.10813, -0.07276,
+                    -0.07367, -0.00605,  1.07602
+	            );
+	            float3 v = mul(m1 , color);    
+	            float3 a = v * (v + 0.0245786) - 0.000090537;
+	            float3 b = v * (0.983729 * v + 0.4329510) + 0.238081;
+	            return pow(clamp(mul(m2 , (a / b)), 0.0, 1.0), float3(1.0 / 2.2, 1.0 / 2.2, 1.0 / 2.2));	
+            }
+
             float3 palette(float t, float3 a, float3 b, float3 c, float3 d)
             {
                 return a + b*cos(6.28318*(c*t+d));
             }
 
-            float3 circles(float3 col, float2 uv, float n, float speed, float width)
+            float circles(float2 uv, float n, float speed, float width)
             {
                 float t = _Time.y*_FinalSpeed + _TimeScrub;
                 float d = length(uv);
                 d = sin(d*n + (t*speed))/width;
                 d = abs(d);
                 d = 0.02/d;
-                return saturate(col*d);
+                return saturate(d);
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
                float2 uv = (i.uv-.5)*_Aspect.yx;
+               uv.x+=_Time.x*0.5;
                float2 uv0 = uv*_Scale;
 
-               float3 finalColor = 0;
 
-               finalColor += circles(lerp(col, col2, sin(6.2831853*length(uv0))), uv*_Scale, 3, -0.45, 1);
-               finalColor += circles(lerp(col, col2, sin(6.2831853*length(uv0))), frac(1.75*uv*_Scale)-0.5, 3, 0.45, 1);
-               finalColor += circles(lerp(col3, col, sin(6.2831853*length(uv0))), frac(2*uv*_Scale)-0.5, 2, 0.9, 2);
-
+               float finalColor = 0;
+               float tVal = sin(3.141592 * length(uv0));
+               finalColor += circles(uv0, 3, -.5, 1);
+               finalColor += circles(frac(1.5*uv0)-0.5, 3, 1, 1);
+               finalColor += circles(frac(2.75*uv0-1.85)-0.5, 2, .5, 2);
 
                //finalColor = pow(finalColor, 1.2);
+               finalColor += 0.08;
 
-               return float4(finalColor, 1.0);
+               return finalColor;
             }
             ENDCG
         }
