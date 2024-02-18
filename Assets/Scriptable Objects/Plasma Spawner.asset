@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992404c07f5a11345a78dcfb707ef568, type: 3}
+  m_Name: Plasma Spawner
+  m_EditorClassIdentifier: 
+  cardName: Plasma Spawner
+  showcase: {fileID: 2800000, guid: e9302ae26c5d29041b0d6104b622e1b2, type: 3}
+  stats:
+  - statName: Health
+    max: 11
+    current: 6
+    nextUpgrade: 2
+  - statName: Speed
+    max: 7
+    current: 5
+    nextUpgrade: 2
+  - statName: Handling
+    max: 8
+    current: 6
+    nextUpgrade: 1
+  - statName: Damage
+    max: 7
+    current: 5
+    nextUpgrade: 1

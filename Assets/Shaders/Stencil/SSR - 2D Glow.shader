@@ -8,8 +8,10 @@ Shader "Custom/SSR-2D Glow"
         _Metallic ("Metallic", Range(0,1)) = 0.0
         [IntRange] _StencilRef("Read Value", Range(0,255)) = 1
         [Enum(UnityEngine.Rendering.CompareFunction)] _CompareFunction("_CompareFunction", int) = 1
+        [Space]
+        [Space]
+        [Space]
         _Width("Width", Range(0, 0.01)) = 0.0
-        _Center("Center", float) = 0.0
 
         _ShineRot("Shine direction", Range(-3.141592, 3.141592)) = 0.0
         _ShineWidth("Shine Width", Range(0.02, 0.5)) = 0.05
@@ -28,10 +30,10 @@ Shader "Custom/SSR-2D Glow"
 
         Tags { "RenderType"="Opaque" }
         LOD 200
-
+        ZWrite On
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf Standard fullforwardshadows
+        #pragma surface surf Standard
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
@@ -47,7 +49,6 @@ Shader "Custom/SSR-2D Glow"
         half _Metallic;
         fixed4 _Color;
         float _Width;
-        float _Center;
 
         float _ShineRot, _ShineWidth, _ShinePeriod,
         _ShineSpeed, _ShineStrength, _ShineSeparation;
@@ -98,7 +99,6 @@ Shader "Custom/SSR-2D Glow"
             shines += 1.0;
 
             c *= shines;
-
             clip(c.a - 0.01);
             o.Albedo = c.rgb;
             // Metallic and smoothness come from slider variables

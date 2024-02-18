@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Lit Tryout
-  m_Shader: {fileID: -6465566751694194690, guid: 4438c370491fe874f88c7454ca29dc24, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 16146c1ff25206e47bf3ee9bc60da8ea, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -27,14 +27,17 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _Fill: 0.25
-    - _Rate: 0.47
-    - _RotSpeed: 4.3
-    - _Scale: 35
+    - _Boost: 4.08
+    - _Fill: 0.33
+    - _Rate: 0.21
+    - _RotSpeed: 1.2
+    - _Scale: 10
+    - _ScanlineIntensity: 1.73
+    - _Scanlines: 25
     m_Colors:
-    - _Color1: {r: 0.9559748, g: 0.12926684, b: 0.12926684, a: 1}
-    - _Color2: {r: 0.7490196, g: 0.6533534, b: 0.14901958, a: 1}
-    - _Color3: {r: 1, g: 0.74367404, b: 0.38823533, a: 1}
+    - _Color1: {r: 0.3679244, g: 0.41922837, b: 1, a: 1}
+    - _Color2: {r: 0.3061354, g: 0.7490196, b: 0.14901958, a: 1}
+    - _Color3: {r: 0.72577167, g: 0.38823533, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5601908988371657149
 MonoBehaviour:
