@@ -15,6 +15,8 @@ public class ObjectShowcase : MonoBehaviour
     [SerializeField] private bool mouseXInverted;
     [SerializeField] private RollDirection mouseYRollDirection;
     [SerializeField] private bool mouseYInverted;
+    [SerializeField] private float pitchMin, pitchMax;
+    [SerializeField] private float rollMin, rollMax;
 
     private Vector2 initMousePos;
     private Vector2 currentMousePos;
@@ -42,8 +44,8 @@ public class ObjectShowcase : MonoBehaviour
         {
             currentMousePos = Input.mousePosition;
             difference = currentMousePos - initMousePos;
-            pitch = Mathf.Clamp(difference.x * rotScale, -45, 45);
-            roll = Mathf.Clamp(difference.y * rotScale, -45, 45);
+            pitch = Mathf.Clamp(difference.x * rotScale, pitchMin, pitchMax);
+            roll = Mathf.Clamp(difference.y * rotScale, rollMin, rollMax);
             newRot = GetRotationDirection(mouseXRollDirection, pitch) * GetModifier(mouseXInverted) +
                      GetRotationDirection(mouseYRollDirection, roll) * GetModifier(mouseYInverted);
             newRot += initVectorRotation;
